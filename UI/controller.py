@@ -30,19 +30,21 @@ class Controller:
         listaStudenti = daoS.getAllStudenti()
 
         matricola_target = int(self._view.txt_matricola.value)
+        Nomestudente=""
+        Cognomestudente=""
         for s in listaStudenti:
               if s['matricola'] == matricola_target:
                   Nomestudente = s['nome']
                   Cognomestudente = s['cognome']
                   break
+        if Nomestudente is None or Nomestudente == "":
+            self._view.create_alert("Matricola non presente!")
+            return
         self._view.txt_nome.value = Nomestudente
         self._view.txt_cognome.value = Cognomestudente
         self._view.update_page()
 
 
-
-    def handle_cercaStudente(self, e):
-        pass
 
     def handle_cercaCorsi(self, e):
         pass

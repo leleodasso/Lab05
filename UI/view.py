@@ -37,13 +37,13 @@ class View(ft.UserControl):
         row1 = ft.Row([self.dd_corso, self.btn_cercaIscritti],alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row1)
         # ROW2 with some controls
-        self.txt_matricola = ft.TextField(label="matricola",width=150, on_change=self._controller.handle_NomeCognome)
+        self.txt_matricola = ft.TextField(label="matricola",width=150)
         self.txt_nome = ft.TextField(label="nome",width=200, read_only = True)
         self.txt_cognome = ft.TextField(label="cognome",width=200, read_only = True)
         row2 = ft.Row([self.txt_matricola, self.txt_nome, self.txt_cognome], alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row2)
         # ROW3 with some controls
-        self.btn_cercaStudente = ft.ElevatedButton(text="Cerca studente ", on_click=self._controller.handle_cercaStudente)
+        self.btn_cercaStudente = ft.ElevatedButton(text="Cerca studente ", on_click=self._controller.handle_NomeCognome)
         self.btn_cercaCorsi =  ft.ElevatedButton(text="Cerca corsi ", on_click=self._controller.handle_cercaCorsi)
         self.btn_Iscrivi=  ft.ElevatedButton(text="Iscrivi", on_click=self._controller.handle_Iscrivi)
         row3 = ft.Row([self.btn_cercaStudente, self.btn_cercaCorsi, self.btn_Iscrivi], alignment=ft.MainAxisAlignment.CENTER)
