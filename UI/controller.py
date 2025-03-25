@@ -28,6 +28,9 @@ class Controller:
         codiceCorso = daoC.getCodCorso(nomeCorso)
         print(codiceCorso[0])
         elencoMatricoleCorso = daoC.getElencoMatricoleCorso(codiceCorso[0])
+        self._view.txt_result.controls.append(ft.Text(f"Ci sono {len(elencoMatricoleCorso)} iscritti al corso:"))
+        self._view.update_page()
+
         for el in elencoMatricoleCorso:
             print(el[0])
         for el in elencoMatricoleCorso:
@@ -37,14 +40,14 @@ class Controller:
         self._view.update_page()
 
 
-
-
-
     def handle_NomeCognome(self,e):
         # Creiamo un'istanza
         listaStudenti = daoS.getAllStudenti()
-
-        matricola_target = int(self._view.txt_matricola.value)
+        matricola_target = self._view.txt_matricola.value
+        if matricola_target is None or matricola_target == "":
+            self._view.create_alert("Digitare una matricola!")
+            return
+        matricola_target = int(matricola_target)
         Nomestudente=""
         Cognomestudente=""
         for s in listaStudenti:
@@ -60,9 +63,16 @@ class Controller:
         self._view.update_page()
 
 
-
     def handle_cercaCorsi(self, e):
-        pass
+        MatricStudente = self._view.txt_matricola.value
+        codisCorsi = (daoS.getCodinsStudente(MatricStudente))
+        self._view.txt_result.controls.append(ft.Text(f"Risultano {len(codisCorsi)} corsi:"))
+        self._view.update_page()
+        for el in codisCorsi:
+            corso = daoS.getCorso(el["codins"])
+            strCorso = f"{corso["nome"]} ({corso["codins"]})"
+            self._view.txt_result.controls.append(ft.Text(f"{strCorso}"))
+        self._view.update_page()
 
     def handle_Iscrivi(self, e):
         pass
